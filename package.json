@@ -2,13 +2,15 @@
   "name": "beyond-the-system__back-end",
   "version": "0.1.0",
   "description": "tech challenge",
+  "main": "src/main.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/guilhermelMoraes/silver-octo-broccoli.git"
   },
   "scripts": {
     "prepare": "husky install",
-    "lint": "eslint --fix src/**/*.{ts,js,json}"
+    "lint": "eslint --fix src/**/*.{ts,js,json}",
+    "dev": "nodemon"
   },
   "keywords": [
     "node.js",
@@ -32,6 +34,7 @@
     "eslint-plugin-import": "^2.27.5",
     "husky": "^8.0.3",
     "lint-staged": "^13.1.1",
+    "nodemon": "^2.0.20",
     "typescript": "^4.9.5"
   },
   "dependencies": {
