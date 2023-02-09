@@ -3,6 +3,13 @@
     "es2021": true,
     "node": true
   },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".ts"]
+      }
+    }
+  },
   "extends": [
     "airbnb-base"
   ],
@@ -15,5 +22,13 @@
     "@typescript-eslint"
   ],
   "rules": {
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "ts": "never"
+      }
+    ]
   }
 }
