@@ -2,7 +2,7 @@
   "name": "beyond-the-system__back-end",
   "version": "0.1.0",
   "description": "tech challenge",
-  "main": "src/main.ts",
+  "main": "src/http/server.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/guilhermelMoraes/silver-octo-broccoli.git"
