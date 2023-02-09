@@ -6,8 +6,8 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER=expenses-app__admin
-      - POSTGRES_PASSWORD=bey0nd_th3_syst3m__202#!
-      - POSTGRES_DB=expenses-app
+      - POSTGRES_USER=expenses
+      - POSTGRES_PASSWORD=beyondTheSystem
+      - POSTGRES_DB=expenses
 volumes:
   pgdata:
