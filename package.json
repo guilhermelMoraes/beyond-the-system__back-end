@@ -1,0 +1,36 @@
+{
+  "name": "beyond-the-system__back-end",
+  "version": "0.1.0",
+  "description": "tech challenge",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guilhermelMoraes/silver-octo-broccoli.git"
+  },
+  "scripts": {
+    "prepare": "husky install",
+    "lint": "eslint --fix src/**/*.{ts,js,json}"
+  },
+  "keywords": [
+    "node.js",
+    "typescript"
+  ],
+  "author": "Guilherme L. Moraes <guilherme.lmoraes.devel@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guilhermelMoraes/silver-octo-broccoli/issues"
+  },
+  "homepage": "https://github.com/guilhermelMoraes/silver-octo-broccoli#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^17.4.2",
+    "@commitlint/config-conventional": "^17.4.2",
+    "@types/node": "^18.13.0",
+    "@typescript-eslint/eslint-plugin": "^5.51.0",
+    "@typescript-eslint/parser": "^5.51.0",
+    "eslint": "^8.33.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.1",
+    "typescript": "^4.9.5"
+  }
+}
