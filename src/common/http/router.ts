@@ -1,5 +1,8 @@
 import { Router } from 'express';
+import v1ExpensesRouter from '../../expenses/infrastructure/http/routes';
 
-const router = Router();
+const v1Router = Router();
 
-export default router;
+v1Router.use(v1ExpensesRouter);
+
+export default v1Router;

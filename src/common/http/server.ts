@@ -5,7 +5,7 @@ import router from './router';
 function createHttpServer() {
   const application = express();
 
-  application.use('/api/v1', router);
+  application.use('/api/v1', v1Router);
 
   application.listen(8000, () => {
     console.log('Application running on port 8000');
