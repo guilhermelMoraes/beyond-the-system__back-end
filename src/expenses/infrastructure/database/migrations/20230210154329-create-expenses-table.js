@@ -17,12 +17,11 @@ exports.up = (db) => db.runSql(`
     description TEXT,
     payment_id INTEGER NOT NULL,
     category_id INTEGER NOT NULL,
-    address_id INTEGER NOT NULL,
+    zip_code VARCHAR(10) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
 
     FOREIGN KEY (payment_id) REFERENCES payment_options(id),
-    FOREIGN KEY (category_id) REFERENCES categories(id),
-    FOREIGN KEY (address_id) REFERENCES addresses(id)
+    FOREIGN KEY (category_id) REFERENCES categories(id)
   );
 `);
 
