@@ -6,6 +6,15 @@ interface Category {
   description: string;
 }
 
+interface Address {
+  zipCode: string;
+  streetAvenueName: string;
+  neighborhood: string;
+  number: string;
+  state: string;
+  city: string;
+}
+
 interface ExpenseProperties {
   readonly id: string;
   price: number;
@@ -13,7 +22,7 @@ interface ExpenseProperties {
   description: string;
   payment: Payment;
   category: Category;
-  zipCode: string;
+  address: Address;
 }
 
 export default ExpenseProperties;
