@@ -7,7 +7,7 @@ import { pool } from '../../../common/database/pool';
 import HttpStatusCode from '../../../common/http/status-code';
 import validationMiddleware from '../../../common/http/validation-middleware';
 import { newExpenseValidationSchema } from '../../domain/dtos/new-expense.dto';
-import ExpensesPostgresRepository from '../../repositories/expenses-pg.repository';
+import ExpensesPostgresRepository from '../database/expenses-pg.repository';
 
 const v1ExpensesController = Router();
 

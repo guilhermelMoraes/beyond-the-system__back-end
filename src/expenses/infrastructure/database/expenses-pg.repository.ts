@@ -1,7 +1,7 @@
 import { Pool } from 'pg';
 
-import NewExpenseDTO from '../domain/dtos/new-expense.dto';
-import ExpensesRepository from './expenses.interface';
+import NewExpenseDTO from '../../domain/dtos/new-expense.dto';
+import ExpensesRepository from '../../repositories/expenses.interface';
 
 class ExpensesPostgresRepository implements ExpensesRepository {
   private readonly _poolClient: Pool;
