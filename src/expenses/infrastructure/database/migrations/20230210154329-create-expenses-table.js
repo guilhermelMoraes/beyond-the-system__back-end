@@ -13,7 +13,7 @@ exports.up = (db) => db.runSql(`
   CREATE TABLE IF NOT EXISTS expenses (
     id serial PRIMARY KEY,
     price REAL NOT NULL,
-    date TIMESTAMP DEFAULT NOW(),
+    date TIMESTAMP NOT NULL DEFAULT NOW(),
     description TEXT,
     payment_id INTEGER NOT NULL,
     category_id INTEGER NOT NULL,

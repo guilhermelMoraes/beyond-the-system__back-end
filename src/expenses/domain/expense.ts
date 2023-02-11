@@ -1,4 +1,4 @@
-type Payment = 'Débito' | 'Crédito' | 'Dinheiro' | 'Pix';
+type Payment = 'débito' | 'crédito' | 'dinheiro' | 'pix';
 
 interface Category {
   readonly id: string;
@@ -10,7 +10,7 @@ interface Address {
   zipCode: string;
   streetAvenueName: string;
   neighborhood: string;
-  number: string;
+  number: number;
   state: string;
   city: string;
 }
@@ -26,3 +26,4 @@ interface ExpenseProperties {
 }
 
 export default ExpenseProperties;
+export { Address, Payment };

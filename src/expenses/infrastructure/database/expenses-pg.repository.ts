@@ -1,10 +1,24 @@
 import { Pool } from 'pg';
 
 import NewExpenseDTO from '../../domain/dtos/new-expense.dto';
-import ExpenseProperties from '../../domain/expense';
+import { Payment } from '../../domain/expense';
 import ExpensesRepository from '../../repositories/expenses.interface';
 
-class ExpensesPostgresRepository implements ExpensesRepository {
+interface RawDbExpense {
+  id: string;
+  price: number;
+  description: string;
+  zip_code: string;
+  commerce_address_number: number;
+  created_at: Date;
+  date: Date;
+  payment: Payment;
+  category_id: string;
+  category: string;
+  category_description: string;
+}
+
+class ExpensesPostgresRepository implements ExpensesRepository<RawDbExpense> {
   private readonly _poolClient: Pool;
 
   constructor(poolClient: Pool) {
@@ -12,7 +26,7 @@ class ExpensesPostgresRepository implements ExpensesRepository {
   }
 
   public async newExpense({
-    date,
+    date = new Date(),
     price,
     zipCode,
     commerceAddressNumber,
@@ -29,10 +43,31 @@ class ExpensesPostgresRepository implements ExpensesRepository {
     );
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  public async listExpenses(): Promise<ExpenseProperties[]> {
-    return [];
+  public async listCurrentMonthExpenses(): Promise<RawDbExpense[]> {
+    const { rows } = await this._poolClient.query(
+      `
+        select
+          ex.id,
+          ex.price,
+          ex.description,
+          ex.zip_code,
+          ex.commerce_address_number,
+          ex.created_at,
+          po."name" as payment,
+          cat."name" as category,
+          cat.id as category_id,
+          cat.description as category_description
+        from expenses ex
+          inner join payment_options po on po.id = ex.payment_id
+          inner join categories cat on cat.id  = ex.category_id
+        where extract(month from ex.date) >= date_part('month', (select current_timestamp));
+      `,
+      [],
+    );
+
+    return rows;
   }
 }
 
 export default ExpensesPostgresRepository;
+export { RawDbExpense };
