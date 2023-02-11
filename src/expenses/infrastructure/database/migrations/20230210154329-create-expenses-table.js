@@ -18,6 +18,7 @@ exports.up = (db) => db.runSql(`
     payment_id INTEGER NOT NULL,
     category_id INTEGER NOT NULL,
     zip_code VARCHAR(10) NOT NULL,
+    commerce_address_number INTEGER NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
 
     FOREIGN KEY (payment_id) REFERENCES payment_options(id),
