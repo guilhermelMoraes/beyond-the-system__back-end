@@ -71,6 +71,15 @@ class ExpensesPostgresRepository implements ExpensesRepository<RawDbExpense> {
 
     return rows;
   }
+
+  public async deleteExpense(id: number): Promise<void> {
+    await this._poolClient.query(
+      `
+        delete from expenses where expenses.id = $1
+      `,
+      [id],
+    );
+  }
 }
 
 export default ExpensesPostgresRepository;

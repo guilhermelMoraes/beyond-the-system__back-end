@@ -7,6 +7,7 @@ import { pool } from '../../../common/database/pool';
 import pagination from '../../../common/http/pagination';
 import HttpStatusCode from '../../../common/http/status-code';
 import validationMiddleware from '../../../common/http/validation-middleware';
+import { deleteExpenseValidationSchema } from '../../domain/dtos/delete-expense.dto';
 import { newExpenseValidationSchema } from '../../domain/dtos/new-expense.dto';
 import ExpensesService from '../../services/expenses.service';
 import ExpensesPostgresRepository from '../database/expenses-pg.repository';
@@ -21,7 +22,10 @@ v1ExpensesController.post(
   validationMiddleware(newExpenseValidationSchema),
   async (req: Request, res: Response): Promise<void> => {
     await expensesRepository.newExpense(req.body);
-    res.sendStatus(HttpStatusCode.CREATED);
+    res.status(HttpStatusCode.CREATED).json({
+      success: true,
+      data: null,
+    });
   },
 );
 
@@ -32,9 +36,21 @@ v1ExpensesController.get(
     const result = await expensesService.listExpensesWithAddress(
       { offset: pagination(Number(req.query.page)) },
     );
-    res.json({
+    res.status(HttpStatusCode.OK).json({
       success: true,
       data: result,
+    });
+  },
+);
+
+v1ExpensesController.delete(
+  `${BASE_PATH}/:id`,
+  validationMiddleware(deleteExpenseValidationSchema, 'params'),
+  async (req: Request, res: Response): Promise<void> => {
+    await expensesRepository.deleteExpense(Number(req.params.id));
+    res.status(HttpStatusCode.OK).json({
+      success: true,
+      data: null,
     });
   },
 );
