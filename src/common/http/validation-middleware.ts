@@ -11,9 +11,10 @@ import HttpStatusCode from './status-code';
 
 function validationMiddleware<T extends Maybe<AnyObject>>(
   validationSchema: ObjectSchema<T>,
+  target: 'body' | 'params' = 'body',
 ): RequestHandler {
   return async (request: Request, response: Response, next: NextFunction): Promise<void> => {
-    const status = await validationBySchema(validationSchema, request.body);
+    const status = await validationBySchema(validationSchema, request[target]);
     if (!status.succeed) {
       response.status(HttpStatusCode.BAD_REQUEST).json({
         success: status.succeed,
