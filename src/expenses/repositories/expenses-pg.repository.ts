@@ -12,7 +12,7 @@ class ExpensesPostgresRepository implements ExpensesRepository {
 
   public async newExpense({
     date,
-    value,
+    price,
     zipCode,
     categoryId,
     description,
@@ -20,10 +20,10 @@ class ExpensesPostgresRepository implements ExpensesRepository {
   }: NewExpenseDTO): Promise<void> {
     await this._poolClient.query(
       `
-        INSERT INTO expenses (value, description, payment_id, category_id, zip_code, date) VALUES
+        INSERT INTO expenses (price, description, payment_id, category_id, zip_code, date) VALUES
         ($1, $2, $3, $4, $5, $6);
       `,
-      [value, description, paymentOptionId, categoryId, zipCode, date],
+      [price, description, paymentOptionId, categoryId, zipCode, date],
     );
   }
 }

@@ -12,7 +12,7 @@ exports.setup = (options, seedLink) => {
 exports.up = (db) => db.runSql(`
   CREATE TABLE IF NOT EXISTS expenses (
     id serial PRIMARY KEY,
-    value REAL NOT NULL,
+    price REAL NOT NULL,
     date TIMESTAMP DEFAULT NOW(),
     description TEXT,
     payment_id INTEGER NOT NULL,

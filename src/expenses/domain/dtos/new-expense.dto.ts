@@ -2,17 +2,17 @@ import { number, object, string } from 'yup';
 
 import ExpenseProperties from '../expense';
 
-interface NewExpenseDTO extends Pick<ExpenseProperties, 'value' | 'description' | 'zipCode'> {
+interface NewExpenseDTO extends Pick<ExpenseProperties, 'price' | 'description' | 'zipCode'> {
   paymentOptionId: string;
   categoryId: string;
   date?: Date;
 }
 
 const newExpenseValidationSchema = object().shape({
-  value: number()
-    .required('"value" é um campo obrigatório')
-    .positive('"value" deve ser um número positivo')
-    .typeError('"value" deve ser do tipo number'),
+  price: number()
+    .required('"price" é um campo obrigatório')
+    .positive('"price" deve ser um número positivo')
+    .typeError('"price" deve ser do tipo number'),
   description: string()
     .required('"description" é um campo obrigatório')
     .typeError('"description" deve ser do tipo string'),

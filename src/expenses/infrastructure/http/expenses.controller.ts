@@ -19,7 +19,7 @@ v1ExpensesController.post(
   validationMiddleware(newExpenseValidationSchema),
   async (req: Request, res: Response): Promise<void> => {
     await expensesRepository.newExpense(req.body);
-    res.status(HttpStatusCode.CREATED);
+    res.sendStatus(HttpStatusCode.CREATED);
   },
 );
 
