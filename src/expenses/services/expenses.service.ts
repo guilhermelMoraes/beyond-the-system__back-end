@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import ExpenseProperties, { Address } from '../domain/expense';
 import { RawDbExpense } from '../infrastructure/database/expenses-pg.repository';
-import ExpensesRepository from '../repositories/expenses.interface';
+import ExpensesRepository, { Options } from '../repositories/expenses.interface';
 
 class ExpensesService {
   private readonly _expensesRepository: ExpensesRepository;
@@ -24,8 +24,9 @@ class ExpensesService {
     };
   }
 
-  public async listExpensesWithAddress(): Promise<ExpenseProperties[]> {
-    const expenses: RawDbExpense[] = await this._expensesRepository.listCurrentMonthExpenses();
+  public async listExpensesWithAddress(listOptions?: Options): Promise<ExpenseProperties[]> {
+    const expenses: RawDbExpense[] = await this._expensesRepository
+      .listCurrentMonthExpenses(listOptions);
 
     const expensesWithAddress = expenses.map(async (rawExpense): Promise<ExpenseProperties> => ({
       id: rawExpense.id,

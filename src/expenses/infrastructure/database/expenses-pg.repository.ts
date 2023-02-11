@@ -2,7 +2,7 @@ import { Pool } from 'pg';
 
 import NewExpenseDTO from '../../domain/dtos/new-expense.dto';
 import { Payment } from '../../domain/expense';
-import ExpensesRepository from '../../repositories/expenses.interface';
+import ExpensesRepository, { Options } from '../../repositories/expenses.interface';
 
 interface RawDbExpense {
   id: string;
@@ -43,7 +43,11 @@ class ExpensesPostgresRepository implements ExpensesRepository<RawDbExpense> {
     );
   }
 
-  public async listCurrentMonthExpenses(): Promise<RawDbExpense[]> {
+  public async listCurrentMonthExpenses(
+    listOptions: Options = {
+      offset: 0,
+    },
+  ): Promise<RawDbExpense[]> {
     const { rows } = await this._poolClient.query(
       `
         select
@@ -60,9 +64,9 @@ class ExpensesPostgresRepository implements ExpensesRepository<RawDbExpense> {
         from expenses ex
           inner join payment_options po on po.id = ex.payment_id
           inner join categories cat on cat.id  = ex.category_id
-        where extract(month from ex.date) >= date_part('month', (select current_timestamp));
+        where extract(month from ex.date) >= date_part('month', (select current_timestamp)) limit 10 offset $1;
       `,
-      [],
+      [listOptions.offset],
     );
 
     return rows;

@@ -4,6 +4,7 @@ import {
 } from 'express';
 
 import { pool } from '../../../common/database/pool';
+import pagination from '../../../common/http/pagination';
 import HttpStatusCode from '../../../common/http/status-code';
 import validationMiddleware from '../../../common/http/validation-middleware';
 import { newExpenseValidationSchema } from '../../domain/dtos/new-expense.dto';
@@ -28,7 +29,9 @@ v1ExpensesController.get(
   BASE_PATH,
   async (req: Request, res: Response): Promise<void> => {
     const expensesService = new ExpensesService(expensesRepository);
-    const result = await expensesService.listExpensesWithAddress();
+    const result = await expensesService.listExpensesWithAddress(
+      { offset: pagination(Number(req.query.page)) },
+    );
     res.json({
       success: true,
       data: result,
