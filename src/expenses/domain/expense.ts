@@ -8,7 +8,7 @@ interface Category {
 
 interface ExpenseProperties {
   readonly id: string;
-  value: string;
+  value: number;
   date: Date;
   description: string;
   payment: Payment;
