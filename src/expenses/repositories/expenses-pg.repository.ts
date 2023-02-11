@@ -1,13 +1,13 @@
-import { Pool, QueryResult } from 'pg';
+import { Pool } from 'pg';
 
-import ExpenseProperties from '../domain/expense';
-import ExpensesRepository, { NewExpense } from './expenses.interface';
+import NewExpenseDTO from '../domain/dtos/new-expense.dto';
+import ExpensesRepository from './expenses.interface';
 
 class ExpensesPostgresRepository implements ExpensesRepository {
-  private readonly _pool: Pool;
+  private readonly _poolClient: Pool;
 
-  constructor(poolConnection: Pool) {
-    this._pool = poolConnection;
+  constructor(poolClient: Pool) {
+    this._poolClient = poolClient;
   }
 
   public async newExpense({
@@ -17,16 +17,14 @@ class ExpensesPostgresRepository implements ExpensesRepository {
     categoryId,
     description,
     paymentOptionId,
-  }: NewExpense): Promise<ExpenseProperties> {
-    const result: QueryResult<ExpenseProperties> = await this._pool.query(
+  }: NewExpenseDTO): Promise<void> {
+    await this._poolClient.query(
       `
         INSERT INTO expenses (value, description, payment_id, category_id, zip_code, date) VALUES
-        ($1, $2, $3, $4, $5, $6) RETURNING *;
+        ($1, $2, $3, $4, $5, $6);
       `,
       [value, description, paymentOptionId, categoryId, zipCode, date],
     );
-
-    return result.rows[0];
   }
 }
 
