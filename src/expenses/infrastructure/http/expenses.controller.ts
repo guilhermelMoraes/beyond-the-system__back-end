@@ -57,6 +57,19 @@ v1ExpensesController.patch(
   },
 );
 
+v1ExpensesController.put(
+  `${BASE_PATH}/:id`,
+  validationMiddleware(expenseIdValidationSchema, 'params'),
+  validationMiddleware(newExpenseValidationSchema),
+  async (req: Request, res: Response) => {
+    await expensesRepository.editExpense({ id: req.params.id, ...req.body });
+    res.status(HttpStatusCode.OK).json({
+      success: true,
+      data: null,
+    });
+  },
+);
+
 v1ExpensesController.delete(
   `${BASE_PATH}/:id`,
   validationMiddleware(expenseIdValidationSchema, 'params'),
