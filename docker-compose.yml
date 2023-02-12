@@ -5,9 +5,7 @@ services:
       - 5432:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_USER=expenses
-      - POSTGRES_PASSWORD=beyondTheSystem
-      - POSTGRES_DB=expenses
+    env_file:
+      - .env
 volumes:
   pgdata:
