@@ -1,10 +1,10 @@
 import { number, object } from 'yup';
 
-interface DeleteExpepenseDTO {
+interface ExpenseIdDTO {
   id: number;
 }
 
-const deleteExpenseValidationSchema = object().shape({
+const expenseIdValidationSchema = object().shape({
   id: number()
     .required('"id" é um campo obrigatório')
     .positive('"id" deve ser um número positivo')
@@ -12,5 +12,5 @@ const deleteExpenseValidationSchema = object().shape({
     .typeError('"id" deve ser do tipo number'),
 });
 
-export default DeleteExpepenseDTO;
-export { deleteExpenseValidationSchema };
+export default ExpenseIdDTO;
+export { expenseIdValidationSchema };
