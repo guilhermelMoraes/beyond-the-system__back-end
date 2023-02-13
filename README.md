@@ -11,3 +11,8 @@
 4. Uma vez que o container executando postgres seja inicializado, execute o seguinte comando `npm install && npm run migrate && npm run seed && npm run dev`;
 
 Pronto! A API funcionará por padrão na porta 8000.
+
+## Endpoints disponíveis
+
+GET, POST: `http://localhost:8000/api/v1/despesas`;
+PUT, PATCH, DELETE: `http://localhost:8000/api/v1/despesas/ID_DESPESA`;
