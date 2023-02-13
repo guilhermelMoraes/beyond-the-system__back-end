@@ -1,4 +1,4 @@
-# Beyond the system - Front-end
+# Beyond the system - Back-end
 
 ## Como executar o projeto ⚒️
 
