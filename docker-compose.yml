@@ -1,5 +1,6 @@
 services:
   database:
+    container_name: beyond-the-system__database
     image: postgres
     ports:
       - 5432:5432
@@ -7,5 +8,10 @@ services:
       - pgdata:/var/lib/postgresql/data
     env_file:
       - .env
+    networks:
+      - beyond-the-system__net
 volumes:
   pgdata:
+networks:
+  beyond-the-system__net:
+    external: false
