@@ -15,4 +15,5 @@ Pronto! A API funcionará por padrão na porta 8000.
 ## Endpoints disponíveis
 
 GET, POST: `http://localhost:8000/api/v1/despesas`;
+
 PUT, PATCH, DELETE: `http://localhost:8000/api/v1/despesas/ID_DESPESA`;
