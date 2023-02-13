@@ -9,6 +9,8 @@
   },
   "scripts": {
     "prepare": "husky install",
+    "migrate":"db-migrate up --config src/common/database/database.json --migrations-dir src/expenses/infrastructure/database/migrations",
+    "seed": "db-migrate up --config src/common/database/database.json --migrations-dir src/expenses/infrastructure/database/seeders",
     "lint": "eslint --fix src/**/*.{ts,js,json}",
     "dev": "nodemon"
   },
